@@ -1,0 +1,19 @@
+# Environments and secrets
+.venv/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.coverage
+
+# Runtime-generated data (vector index and agent memory)
+.chroma/
+checkpoints.sqlite
