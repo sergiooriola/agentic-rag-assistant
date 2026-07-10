@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env # provides OPENAI_API_KEY; never baked into the image
+    environment:
+      # Point runtime-generated state at the persistent volume.
+      CHROMA_DIR: /app/state/chroma
+      CHECKPOINT_DB: /app/state/checkpoints.sqlite
+    volumes:
+      - ./data:/app/data:ro # source documents (read-only: ingestion only reads)
+      - state:/app/state # vector index + conversation memory
+
+volumes:
+  state:

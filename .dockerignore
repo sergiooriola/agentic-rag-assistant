@@ -1,0 +1,14 @@
+# Never ship secrets, environments, or runtime state into the image
+.env
+.venv/
+.git/
+.chroma/
+checkpoints.sqlite
+
+# Development-only artifacts
+tests/
+.github/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.egg-info/
