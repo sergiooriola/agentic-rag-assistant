@@ -45,6 +45,14 @@ class Settings(BaseSettings):
     chunk_size: int = 512
     chunk_overlap: int = 64
 
+    # --- Agent (phase 4) ---
+    # The intent classifier needs to know what the corpus covers to decide
+    # whether a question can be answered from it. Update when data/ changes.
+    corpus_description: str = (
+        "technical documentation covering HTTP fundamentals, Git branching, "
+        "and REST API design guidelines"
+    )
+
     # --- Hybrid retrieval (phase 3) ---
     top_k_semantic: int = 8   # candidates from vector search
     top_k_lexical: int = 8    # candidates from BM25
