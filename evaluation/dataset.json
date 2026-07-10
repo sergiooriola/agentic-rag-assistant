@@ -1,0 +1,54 @@
+[
+  {
+    "question": "What is the difference between PUT and PATCH?",
+    "expected_source": "http_essentials.md"
+  },
+  {
+    "question": "What does HTTP status code 429 mean?",
+    "expected_source": "http_essentials.md"
+  },
+  {
+    "question": "How does ETag-based cache revalidation work?",
+    "expected_source": "http_essentials.md"
+  },
+  {
+    "question": "Which header does a client use to tell the server which media types it can process?",
+    "expected_source": "http_essentials.md"
+  },
+  {
+    "question": "What is the golden rule of rebasing in Git?",
+    "expected_source": "git_branching.md"
+  },
+  {
+    "question": "When does Git perform a fast-forward instead of creating a merge commit?",
+    "expected_source": "git_branching.md"
+  },
+  {
+    "question": "What is trunk-based development?",
+    "expected_source": "git_branching.md"
+  },
+  {
+    "question": "How can I shelve uncommitted changes before switching branches?",
+    "expected_source": "git_branching.md"
+  },
+  {
+    "question": "Should REST API URLs contain verbs?",
+    "expected_source": "rest_api_design.pdf",
+    "expected_page": 1
+  },
+  {
+    "question": "What are the trade-offs between offset and cursor pagination?",
+    "expected_source": "rest_api_design.pdf",
+    "expected_page": 2
+  },
+  {
+    "question": "Which RFC standardizes the problem details error format?",
+    "expected_source": "rest_api_design.pdf",
+    "expected_page": 3
+  },
+  {
+    "question": "How do idempotency keys help with retrying POST requests safely?",
+    "expected_source": "rest_api_design.pdf",
+    "expected_page": 3
+  }
+]

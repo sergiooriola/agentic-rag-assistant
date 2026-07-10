@@ -1,19 +1,16 @@
 """End-to-end graph tests with a scriptable fake LLM — no API calls.
 
-The fake covers the three roles the graph asks of the LLM (intent
-classification, generation, groundedness judging) plus the tool-calling chat
-branch, so every path through the graph is exercised with real LangGraph
-execution and real checkpointing.
+Every path through the graph is exercised with real LangGraph execution and
+real checkpointing; only the LLM and the retriever are fakes (see fakes.py).
 """
-
-from collections.abc import Callable
 
 from langchain_core.documents import Document
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.checkpoint.memory import MemorySaver
 
-from agentic_rag.agent.graph import GroundednessVerdict, IntentDecision, build_agent
+from agentic_rag.agent.graph import build_agent
 from agentic_rag.agent.prompts import REFUSAL_MESSAGE
+from fakes import FakeLLM, FakeRetriever
 
 DOCS = [
     Document(
@@ -25,49 +22,6 @@ DOCS = [
         metadata={"chunk_id": "c2", "source": "rest_api_design.pdf", "page": 1},
     ),
 ]
-
-
-class _Invoker:
-    def __init__(self, respond: Callable) -> None:
-        self._respond = respond
-
-    def invoke(self, _input: object) -> object:
-        return self._respond()
-
-
-class FakeLLM:
-    """Returns scripted outputs for each role the graph uses."""
-
-    def __init__(
-        self,
-        intent: str = "chat",
-        grounded: bool = True,
-        generation: str = "generated answer",
-        chat_replies: list[AIMessage] | None = None,
-    ) -> None:
-        self.intent = intent
-        self.grounded = grounded
-        self.generation = generation
-        self.chat_replies = chat_replies or [AIMessage("hi there!")]
-
-    def with_structured_output(self, schema: type) -> _Invoker:
-        if schema is IntentDecision:
-            return _Invoker(lambda: IntentDecision(intent=self.intent))
-        return _Invoker(lambda: GroundednessVerdict(grounded=self.grounded))
-
-    def bind_tools(self, _tools: list) -> _Invoker:
-        return _Invoker(lambda: self.chat_replies.pop(0))
-
-    def invoke(self, _messages: list) -> AIMessage:
-        return AIMessage(self.generation)
-
-
-class FakeRetriever:
-    def __init__(self, documents: list[Document]) -> None:
-        self._documents = documents
-
-    def retrieve(self, query: str) -> list[Document]:
-        return self._documents
 
 
 def _agent(llm: FakeLLM, docs: list[Document] = DOCS):
