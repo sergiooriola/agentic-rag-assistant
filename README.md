@@ -1,5 +1,8 @@
 # agentic-rag-assistant
 
+[![CI](https://github.com/sergiooriola/agentic-rag-assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/sergiooriola/agentic-rag-assistant/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A conversational RAG agent built with **LangGraph**: it routes each message through an
 explicit graph that decides whether to retrieve documentary context, performs **hybrid
 retrieval** (semantic embeddings + BM25, fused with reciprocal rank fusion) over a local
@@ -72,7 +75,7 @@ otherwise contaminate every future turn.
 Requirements: Python 3.11+ and an OpenAI API key.
 
 ```bash
-git clone https://github.com/<you>/agentic-rag-assistant && cd agentic-rag-assistant
+git clone https://github.com/sergiooriola/agentic-rag-assistant && cd agentic-rag-assistant
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 cp .env.example .env                                 # then fill in OPENAI_API_KEY
